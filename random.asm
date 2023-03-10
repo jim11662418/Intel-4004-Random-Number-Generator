@@ -15,7 +15,7 @@
 ; IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ;---------------------------------------------------------------------------------------------------------------------------------
 ;
-; This program continuously generates and prints 16 bit random numbers using the Marsaglia
+; This program continuously generates and prints 16 bit random numbers generated using the Marsaglia
 ; (xorshift) algorithm. The initial seed for the algorithm depends upon the time it takes the user
 ; to press a key when prompted. The first random number generated serves as the seed for the second 
 ; random number. The second random number generated serves as the seed for the third random number 
