@@ -85,7 +85,7 @@ reset:          fim P0,SERIALPORT
                 jms prompt              ; print 'Press any key to start...'
                 jms newline
                 
-wait4key:       jcn tn,checkforzero     ; step 1 - produce seed in X by continuously incremeting X until the start bit is detected...        
+wait4key:       jcn tn,checkforzero     ; step 1 - produce seed in X by continuously incrementing X until the start bit is detected...        
                 inc X4
                 ld X4
                 jcn nz,wait4key
