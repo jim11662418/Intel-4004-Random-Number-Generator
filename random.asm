@@ -20,7 +20,7 @@
 ; to press a key when prompted. The first random number generated serves as the seed for the second 
 ; random number. The second random number generated serves as the seed for the third random number 
 ; and so on. All numbers from 1 to 65535 are generated at the same frequency. The xorshift algorithm
-; never generated zero (unless the seed is zero). Since this actually a pseudo-random number generator,
+; never generates zero (unless the seed is zero). Since this actually a pseudo-random number generator,
 ; the sequence of numbers for a particular initial seed will repeat after 65535 numbers are generated 
 ; i.e. the period or cycle length is 2^16-1.
 ;
