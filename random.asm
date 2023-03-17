@@ -283,15 +283,15 @@ prnDecimal:     ldm 0
                 xch R1                  ; clear the leading zero flag (zero means do not print '0')
                 
 ; ten thousands digit
-; count the number of time 10,000 can be subtracted from the number in P4P5 before causing an underflow              
+; count the number of time 10,000 can be subtracted from the number in P2P3 before causing an underflow              
                 ldm 0
                 xch R0                  ; clear the digit counter
                 fim P6,10000 >> 8       ; high byte of 10000
                 fim P7,10000 & 0FFH     ; low byte of 10000
-prnDecimal1:    jms sub16bits           ; subtract 10000 from the number in P4P5
+prnDecimal1:    jms sub16bits           ; subtract 10000 from the number in P2P3
                 inc R0                  ; increment the ten thousands digit counter 
                 jcn z,prnDecimal1       ; jump if no underflow
-                jms add16bits           ; the previous subtraction caused an underflow, add 10000 back to P4P5
+                jms add16bits           ; the previous subtraction caused an underflow, add 10000 back to P2P3
                 ld R0
                 dac                     ; decrement the ten thousands digit counter because of the previous underflow
                 jcn z,prnDecimal2       ; do not print the ten thousands digit if it is is zero
@@ -303,15 +303,15 @@ prnDecimal1:    jms sub16bits           ; subtract 10000 from the number in P4P5
                 xch R1                  ; set the leading zero flag (print all zeros from now on)
 
 ; thousands digit
-; count the number of time 1000 can be subtracted from the number in P4P5 before causing an underflow   
+; count the number of time 1000 can be subtracted from the number in P2P3 before causing an underflow   
 prnDecimal2:    ldm 0
                 xch R0                  ; clear the digit counter
                 fim P6,1000 >> 8        ; high byte of 1000
                 fim P7,1000 & 0FFH      ; low byte of 1000
-prnDecimal2a:   jms sub16bits           ; subtract 1000 from the number in P4P5
+prnDecimal2a:   jms sub16bits           ; subtract 1000 from the number in P2P3
                 inc R0                  ; increment the thousands digit counter 
                 jcn z,prnDecimal2a      ; jump if no underflow
-                jms add16bits           ; the previous subtraction caused an underflow, add 1000 back to P4P5
+                jms add16bits           ; the previous subtraction caused an underflow, add 1000 back to P2P3
                 ld R0
                 dac                     ; decrement the thousands digit counter because of the previous underflow
                 xch R3                  ; move the thousands digit to P1 and convert to ASCII
@@ -326,15 +326,15 @@ prnDecimal2b:   jms putchar             ; print the thoudands digitt
                 xch R1                  ; set the leading zero flag (print all zeros from now on)                
 
 ; hundreds digit...  
-; count the number of time 100 can be subtracted from the number in P4P5 before causing an underflow          
+; count the number of time 100 can be subtracted from the number in P2P3 before causing an underflow          
 prnDecimal3:    ldm 0
                 xch R0                  ; clear the digit counter
                 fim P6,100 >> 8         ; high byte of 100
                 fim P7,100 & 0FFH       ; low byte of 100
-prnDecimal3a:   jms sub16bits           ; subtract 100 from the number in P4P5
+prnDecimal3a:   jms sub16bits           ; subtract 100 from the number in P2P3
                 inc R0                  ; increment the hundreds digit counter 
                 jcn z,prnDecimal3a      ; jump if no underflow
-                jms add16bits           ; the previous subtraction caused an underflow, add 100 back to P4P5
+                jms add16bits           ; the previous subtraction caused an underflow, add 100 back to P2P3
                 ld R0
                 dac                     ; decrement the hundreds digit counter because of the previous underflow
                 xch R3                  ; move the hundreds digit to P1 and convert to ASCII
@@ -349,15 +349,15 @@ prnDecimal3b:   jms putchar             ; print the hundreds digit
                 xch R1                  ; set the leading zero flag (print all zeros from now on)
 
 ; tens digit...   
-; count the number of time 10 can be subtracted from the number in P4P5 before causing an underflow                        
+; count the number of time 10 can be subtracted from the number in P2P3 before causing an underflow                        
 prnDecimal4:    ldm 0
                 xch R0                  ; clear the digit counter
                 fim P6,10 >> 8          ; high byte of 10
                 fim P7,10 & 0FFH        ; low byte of 10
-prnDecimal4a:   jms sub16bits           ; subtract 10 from the number in P4P5
+prnDecimal4a:   jms sub16bits           ; subtract 10 from the number in P2P3
                 inc R0                  ; increment the tens digit counter 
                 jcn z,prnDecimal4a      ; jump if no underflow
-                jms add16bits           ; the previous subtraction caused an underflow, add 10 back to P4P5
+                jms add16bits           ; the previous subtraction caused an underflow, add 10 back to P2P3
                 ld R0
                 dac                     ; decrement the tens digit counter because of the previous underflow
                 xch R3                  ; move the tens digit to P1 and convert to ASCII
@@ -370,8 +370,8 @@ prnDecimal4a:   jms sub16bits           ; subtract 10 from the number in P4P5
 prnDecimal4b:   jms putchar             ; print the hundreds digit
                 
 ; units digit...   
-; whatever remains in P4P5 after the subtractions above represents the units digit            
-prnDecimal5:    ld R7                   ; move what remains in P4P5 to P1 and convert to ASCII
+; whatever remains in P2P3 after the subtractions above represents the units digit            
+prnDecimal5:    ld R7                   ; move what remains in P2P3 to P1 and convert to ASCII
                 xch R3
                 ldm 3
                 xch R2
