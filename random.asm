@@ -53,7 +53,7 @@
                 include "bitfuncs.inc"  ; Include bit functions so that FIN can be loaded from a label (upper 4 bits of address are loped off).
                 include "reg4004.inc"   ; Include 4004 register definitions.
  
-; the four registers of P4 and P5 together (R8,R8,R19,R11) make up 'X'. 
+; the four registers of P4 and P5 together (R8,R9,R10,R11) make up 'X'. 
 X1 reg R8
 X2 reg R9
 X3 reg R10
